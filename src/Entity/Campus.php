@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CampusRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CampusRepository::class)
@@ -19,6 +20,9 @@ class Campus
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\NotBlank(message="Veuillez entrez votre nom !")
+     * @Assert\Length(min=2, max=60)
+     * @Assert\Regex()    // TODO
      */
     private $nom;
 
