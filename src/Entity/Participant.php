@@ -68,19 +68,25 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $motPasse;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants") // TODO participant au pluriel
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
      */
     private $sorties;
-// TODO toutes les sorties organisées > organisateur
+
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur", orphanRemoval=true)
+     */
+    private $participant;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->participant = new ArrayCollection();
     }
 
 
@@ -252,5 +258,35 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __call($name, $arguments)
     {
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getParticipant(): Collection
+    {
+        return $this->participant;
+    }
+
+    public function addParticipant(Sortie $participant): self
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+            $participant->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Sortie $participant): self
+    {
+        if ($this->participant->removeElement($participant)) {
+            // set the owning side to null (unless already changed)
+            if ($participant->getOrganisateur() === $this) {
+                $participant->setOrganisateur(null);
+            }
+        }
+
+        return $this;
     }
 }
