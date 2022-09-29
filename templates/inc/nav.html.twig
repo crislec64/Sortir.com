@@ -1,0 +1,20 @@
+<nav>
+    <ul>
+        <li><a href="{{ path('main_home') }}" title="Home"> Accueil</a></li>
+        {% if app.user %}
+            {#  todo:<li><a href="{{ path('main_profil') }}" title="register">Mon Profil </a></li>#}
+            <li><a href="{{ path('app_logout') }}" title="Logout"> Se déconnecter </a></li>
+            {% if is_granted("ROLE_ADMIN")%}
+                <li><a href="{{ path('admin_list') }}" title="Ville"> Ville </a></li>
+                <li><a href="{{ path('admin_create') }}" title="campus"> Creation ville </a></li>
+                <li><a href="{{ path('admin_campus') }}" title="campus"> Campus </a></li>
+            {% endif %}
+        {% else  %}
+            <li><a href="{{ path('app_login') }}" title="Login"> Se connecter </a></li>
+            <li><a href="{{ path('app_register') }}" title="créer un compte"> créer un compte </a></li>
+
+        {% endif %}
+
+
+    </ul>
+</nav>
