@@ -1,0 +1,26 @@
+{% extends '/base.html.twig' %}
+
+{% block title %}
+    Création ville | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+
+    <div class="form">
+        {# ouvre ma balise form #}
+        {{ form_start(villeForm) }}
+
+        {# affiche tous les champs du formulaire#}
+        {{ form_widget(villeForm) }}
+
+        {# le bouton de soumission #}
+        <button class="button"> Ajouter </button>
+
+        {# ferme ma balise form #}
+        {{ form_end(villeForm) }}
+    </div>
+
+{% endblock %}

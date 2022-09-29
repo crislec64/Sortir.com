@@ -16,8 +16,18 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    {# message flash : all flash messages #}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <body>
-         {% include '' %}
+    {% include ('inc/nav.html.twig')%}
+    <h1>Accueil</h1>
         {% block body %}{% endblock %}
     </body>
 </html>

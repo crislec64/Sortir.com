@@ -7,7 +7,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<header>
+    <h1><a href="{{ path('main_home') }}" ><img src="{{ asset('#') }}" alt="logo Sortir.com"></a></h1>
+    {% include ('inc/nav.html.twig')%}
+
+</header>
 <body>
-<h1>YOYOLO</h1>
+{% block title %}
+
+
+{% endblock %}
+<h1>Accueil</h1>
+{% block body %}
+{% for sortie in sorties %}
+<table>
+    <tr>
+        <td>Nom de la sortie</td>
+        <td>Date de la sortie</td>
+        <td>Clôture</td>
+        <td>Inscrits/places</td>
+        <td>Etat</td>
+        <td>Inscrits</td>
+        <td>Organisateur</td>
+        <td>Actions</td>
+    </tr>
+    <tr>
+        <td>sortie.nom</td>
+        <td>sortie.dateHeureDebut</td>
+        <td>sortie.duree<td>
+        <td>sortie.nbInscritptionMax</td>
+        <td> Etat ?</td>
+        <td>sortie.dateLimiteInscription</td>
+        <td>sortie.infoSortie</td>
+
+    </tr>
+    {% endfor %}
+    {% endblock %}
+</table>
 </body>
 </html>
