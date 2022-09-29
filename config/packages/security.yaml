@@ -19,7 +19,7 @@ security:
             provider: users_in_memory
             custom_authenticator: App\Security\AppCustomAuthenticator
             logout:
-                path: app_login
+                path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
 #            // TODO

@@ -30,7 +30,7 @@ class AdminController extends AbstractController
     public function campus(CampusRepository $campusRepository):Response
     {
         $campus = $campusRepository->findAll();
-        return $this ->render('admin/campus.html.twig', [
+        return $this ->render('listing.html.twig', [
             "campus"=>$campus
         ]);
     }

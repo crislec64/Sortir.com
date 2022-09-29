@@ -1,5 +1,25 @@
 {% extends '/base.html.twig' %}
 {% block title %}
-Liste Campus
+    Liste campus
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>Gérer les campus</h1>
+
+
+        <table>
+        <tr>
+            <td>Campus</td>
+
+            {% for campus in campus %}
+        </tr>
+        <tr>
+            <td>{{ campus.nom }}</td>
+
+        </tr>
+            {% endfor %}
+        </table>
 
 {% endblock %}
