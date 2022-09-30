@@ -9,13 +9,13 @@ Liste des ville
 
     <h1>Gérer les villes</h1>
 
-   {% for ville in villes %}
+
     <table>
        <tr>
            <td>Ville</td>
            <td>Code postal</td>
            <td>Action</td>
-
+           {% for ville in villes %}
        </tr>
         <tr>
             <td>{{ ville.nom }}</td>
@@ -23,9 +23,9 @@ Liste des ville
             <td></td>
         </tr>
 
+            {% endfor %}
        {# TODO : include dans gérer des villes (pas laisser seul) #}
 
-    {% endfor %}
 
     </table>
 

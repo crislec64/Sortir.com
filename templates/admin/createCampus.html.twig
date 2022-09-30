@@ -1,0 +1,29 @@
+{% extends '/base.html.twig' %}
+{% block title %}
+    Liste ville
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Gérer les campus</h1>
+
+{% for campus in campus %}
+    <div class="form">
+        {# ouvre ma balise form #}
+        {{ form_start(campusForm) }}
+
+        {# affiche tous les champs du formulaire#}
+        {{ form_widget(campusForm) }}
+
+        {# le bouton de soumission #}
+        <button class="button"> Ajouter </button>
+
+        {# ferme ma balise form #}
+        {{ form_end(campusform) }}
+    </div>
+
+    {% endfor %}
+
+</table>
+{% endblock %}
