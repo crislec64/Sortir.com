@@ -1,25 +1,29 @@
 {% extends '/base.html.twig' %}
-
 {% block title %}
-    Création ville | {{ parent() }}
+    Liste ville
+
 {% endblock %}
 
 {% block body %}
 
+<h1>Gérer les campus</h1>
+
+{% for campus in campus %}
     <div class="form">
         {# ouvre ma balise form #}
-        {{ form_start(villeForm) }}
+        {{ form_start(campusForm) }}
 
         {# affiche tous les champs du formulaire#}
-        {{ form_widget(villeForm) }}
+        {{ form_widget(campusForm) }}
 
         {# le bouton de soumission #}
         <button class="button"> Ajouter </button>
 
         {# ferme ma balise form #}
-        {{ form_end(villeForm) }}
+        {{ form_end(campusform) }}
     </div>
 
-    {# TODO : incorporer ce formulaire dans gerer des villes #}
+    {% endfor %}
 
+</table>
 {% endblock %}

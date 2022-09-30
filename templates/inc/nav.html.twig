@@ -1,20 +1,21 @@
 <nav>
+    <h1><a href="{{ path('main_home') }}" ><img src="{{ asset('#') }}" alt="logo Sortir.com"></a></h1>
     <ul>
-        <li><a href="{{ path('main_home') }}" title="Home"> Accueil</a></li>
         {% if app.user %}
-            {#  todo:<li><a href="{{ path('main_profil') }}" title="register">Mon Profil </a></li>#}
-            <li><a href="{{ path('app_logout') }}" title="Logout"> Se déconnecter </a></li>
+            {#  todo:<li><a href="{{ path('main_profile') }}" title="Mon profil">Mon Profil </a></li>#}
+            <li><a href="{{ path('app_logout') }}" title="Me déconnecter">Se déconnecter </a></li>
+            <li><a href="{{ path('creation') }}" title="Créer une sortie">Créer une sortie </a></li>
+
             {% if is_granted("ROLE_ADMIN")%}
-                <li><a href="{{ path('admin_list') }}" title="Ville"> Ville </a></li>
-                <li><a href="{{ path('admin_create') }}" title="campus"> Creation ville </a></li>
-                <li><a href="{{ path('admin_campus') }}" title="campus"> Campus </a></li>
+
+                <li><a href="{{ path('admin_list') }}" title="Gérer les villes">Gérer les villes </a></li>
+                <li><a href="{{ path('campus') }}" title="Gérer les campus">Campus </a></li>
+                <li><a href="{{ path('admin_create') }}" title="create"> Creation ville </a></li>
             {% endif %}
         {% else  %}
-            <li><a href="{{ path('app_login') }}" title="Login"> Se connecter </a></li>
-            <li><a href="{{ path('app_register') }}" title="créer un compte"> créer un compte </a></li>
+            <li><a href="{{ path('app_login') }}" title="Me connecter">Se connecter </a></li>
+            <li><a href="{{ path('app_register') }}" title="Créer un compte">Créer un compte </a></li>
 
         {% endif %}
-
-
-    </ul>
+   </ul>
 </nav>

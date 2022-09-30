@@ -1,6 +1,7 @@
 {% extends '/base.html.twig' %}
 {% block title %}
-Liste ville
+Liste des ville
+    TODO : inclure la création des villes dedans cette page
 
 {% endblock %}
 
@@ -8,13 +9,13 @@ Liste ville
 
     <h1>Gérer les villes</h1>
 
-   {% for ville in villes %}
+
     <table>
        <tr>
            <td>Ville</td>
            <td>Code postal</td>
            <td>Action</td>
-
+           {% for ville in villes %}
        </tr>
         <tr>
             <td>{{ ville.nom }}</td>
@@ -22,9 +23,9 @@ Liste ville
             <td></td>
         </tr>
 
+            {% endfor %}
+       {# TODO : include dans gérer des villes (pas laisser seul) #}
 
-
-    {% endfor %}
 
     </table>
 

@@ -1,0 +1,20 @@
+Home / Acceuil :
+main_home
+
+Connexion :
+app_login
+> redirection à l'accueil
+
+S'enregistrer :
+app_register
+> redirection à l'accueil
+
+
+Gérer les campus :
+admin_campus
+
+Gérer les villes :
+admin_list
+
+Créer une sortie :
+admin_create
