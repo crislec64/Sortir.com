@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/admin", name=("admin_")
+ * @Route("/admin", name="admin_")
  */
 class CampusController extends AbstractController
 {
@@ -29,6 +29,7 @@ class CampusController extends AbstractController
             "campus"=>$campus
         ]);
     }
+
     /**
      * @Route("/campusTest", name="em-campustest")
      */
