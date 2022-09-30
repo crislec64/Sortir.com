@@ -16,7 +16,7 @@ class SortieController extends AbstractController
 {
 
 /**
- * @Route("/admin/sortie/creation",name="creation_creation")
+ * @Route("/creation",name="creation")
  */
     public function createSortie(
         Request $request,
@@ -35,7 +35,7 @@ class SortieController extends AbstractController
 
         //TODO traiter le formulaire
 
-        return $this->render('admin/sortie_creation.html.twig', [
+        return $this->render('main/sortie_creation.html.twig', [
             'sortieForm' => $sortieForm ->createView()
         ]);
     }
@@ -43,19 +43,19 @@ class SortieController extends AbstractController
 
 
     /**
-     * @Route("/main/sortie/liste/", name="sortie_liste")
+     * @Route("/", name="sortie_liste")
      */
     public function listSorties(): Response
     {
         //TODO aller chercher toutes les sorties
 
-        return $this->render('main/sortie_list.html.twig');
+        return $this->render('main/home.html.twig');
     }
 
 
 
     /**
-     * @Route("/main/sortie/details/{id}", name="sortie_details")
+     * @Route("/details/{id}", name="sortie_details")
      */
     public function afficherUneSortie(int $id): Response
     {
