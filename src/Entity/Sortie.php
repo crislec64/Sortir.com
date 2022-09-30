@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -20,11 +21,13 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      * @ORM\Column(type="string", length=55)
      */
     private $nom;
 
     /**
+     * @Assert\GreaterThanOrEqual(propertyPath="dateLimiteInscription")
      * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
@@ -40,11 +43,13 @@ class Sortie
     private $dateLimiteInscription;
 
     /**
+     * @Assert\Range(min=5,max=100)
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionsMax;
 
     /**
+     * @Assert\Length(min=20)
      * @ORM\Column(type="string", nullable=true)
      */
     private $infosSortie;
@@ -67,7 +72,7 @@ class Sortie
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties", cascade={"remove"}, cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
@@ -208,7 +213,7 @@ class Sortie
         return $this;
     }
 
-    public function getLieu(): ?Lieu
+    public function getLieu(): ?string
     {
         return $this->lieu;
     }

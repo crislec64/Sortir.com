@@ -15,30 +15,25 @@
 <body>
 {% block body %}
 <h2>Accueil</h2>
-{% for sortie in sorties %}
 <table>
     <tr>
-        <td>Nom de la sortie</td>
-        <td>Date de la sortie</td>
-        <td>Clôture</td>
-        <td>Inscrits/places</td>
-        <td>Etat</td>
-        <td>Inscrits</td>
-        <td>Organisateur</td>
-        <td>Actions</td>
+        <th>Nom de l'événement</th>
+        <th>Date de la sortie</th>
+        <th>Date limite d'inscription</th>
+        <th>Nombre max de participants</th>
+        <th>Organisateur</th>
     </tr>
+{% for sortie in sorties %}
     <tr>
-        <td>sortie.nom</td>
-        <td>sortie.dateHeureDebut</td>
-        <td>sortie.duree<td>
-        <td>sortie.nbInscritptionMax</td>
-        <td> Etat ?</td>
-        <td>sortie.dateLimiteInscription</td>
-        <td>sortie.infoSortie</td>
-
+        <td>{{ sortie.nom }}</td>
+        <td>{{ sortie.dateHeureDebut |date('d-m-y H:i') }}</td>
+        <td>{{ sortie.dateLimiteInscription |date('d-m-y') }}</td>
+        <td>{{ sortie.nbInscriptionsMax }}</td>
+{#        <td>{{ sortie.etat }}</td>#}
+        <td>{{ sortie.organisateur ? 'yes' : '' }}</td>
     </tr>
     {% endfor %}
-    {% endblock %}
 </table>
+    {% endblock %}
 </body>
 </html>

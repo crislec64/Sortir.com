@@ -28,6 +28,7 @@ class CampusController extends AbstractController
             "campus"=>$campus
         ]);
     }
+
     /**
      * @Route("/campusTest", name="em-campustest")
      */
