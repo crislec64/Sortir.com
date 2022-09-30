@@ -23,15 +23,17 @@ class AdminController extends AbstractController
             "villes" => $villes
         ]);
     }
+    /*
     /**
      * @Route ("/campus", name="main_campus")
      */
-
+/*
     public function campus(CampusRepository $campusRepository):Response
     {
         $campus = $campusRepository->findAll();
-        return $this ->render('listing.html.twig', [
+        return $this ->render('admin/campus.html.twig, [
             "campus"=>$campus
         ]);
     }
+    */
 }
