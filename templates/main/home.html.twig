@@ -5,20 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>HOME</title>
 </head>
 <header>
-    <h1><a href="{{ path('main_home') }}" ><img src="{{ asset('#') }}" alt="logo Sortir.com"></a></h1>
+
     {% include ('inc/nav.html.twig')%}
 
 </header>
 <body>
-{% block title %}
-
-
-{% endblock %}
-<h1>Accueil</h1>
 {% block body %}
+<h2>Accueil</h2>
 {% for sortie in sorties %}
 <table>
     <tr>

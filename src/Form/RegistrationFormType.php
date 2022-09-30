@@ -21,6 +21,7 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('telephone')
+            ->add('campus')
             ->add('email')
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,
