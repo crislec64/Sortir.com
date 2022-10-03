@@ -14,21 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/admin", name=("admin_")
+ * @Route("/admin", name="admin_")
  */
 class CampusController extends AbstractController
 {
     /**
-     * @Route("/campus", name="campus")
+     * @Route("", name="campus")
      */
-
-    public function campus(CampusRepository $campusRepository):Response
+    public function campus (CampusRepository $campusRepository): Response
     {
         $campus = $campusRepository->findAll();
-        return $this ->render( 'admin/campus.html.twig',[
+        return $this ->render('admin/campus.html.twig',[
             "campus"=>$campus
         ]);
     }
+
     /**
      * @Route("/campusTest", name="em-campustest")
      */
@@ -64,7 +64,7 @@ class CampusController extends AbstractController
             $entityManager->flush();
 
 
-            $this->addFlash('success', 'Une Campus a été ajoutée');
+            $this->addFlash('success', 'Un Campus a été ajoutée');
 
 
             return $this->redirectToRoute('main_home');

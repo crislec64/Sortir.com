@@ -9,7 +9,7 @@
             {% if is_granted("ROLE_ADMIN")%}
 
                 <li><a href="{{ path('admin_list') }}" title="Gérer les villes">Gérer les villes </a></li>
-                <li><a href="{{ path('campus') }}" title="Gérer les campus">Campus </a></li>
+                <li><a href="{{ path('admin_campus') }}" title="Gérer les campus">Campus </a></li>
                 <li><a href="{{ path('admin_create') }}" title="create"> Creation ville </a></li>
             {% endif %}
         {% else  %}

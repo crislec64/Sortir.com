@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,12 +29,15 @@ class SortieController extends AbstractController
 
         $sortieForm->handleRequest($request);
 
-        if ($sortieForm->isSubmitted()){
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $entityManager->persist($sortie);
             $entityManager->flush();
-        }
 
+
+        $this->addFlash('success', "Sortie créée !");
+        return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
         //TODO traiter le formulaire
+    }
 
         return $this->render('main/sortie_creation.html.twig', [
             'sortieForm' => $sortieForm ->createView()
@@ -45,11 +49,17 @@ class SortieController extends AbstractController
     /**
      * @Route("/", name="sortie_liste")
      */
-    public function listSorties(): Response
+    public function listSorties(int $id, SortieRepository $sortieRepository): Response
     {
-        //TODO aller chercher toutes les sorties
+       $sortie = $sortieRepository-> find($id);
 
-        return $this->render('main/home.html.twig');
+       if(!$sortie){
+           throw $this ->createNotFoundException('Il y a pas ce que vous cherchez ici...');
+       }
+
+        return $this->render('main/home.html.twig',[
+            "sortie" => $sortie
+        ]);
     }
 
 
@@ -57,11 +67,26 @@ class SortieController extends AbstractController
     /**
      * @Route("/details/{id}", name="sortie_details")
      */
-    public function afficherUneSortie(int $id): Response
+    public function afficherUneSortie(int $id, SortieRepository $sortieRepository): Response
     {
-        //TODO aller chercher la sortie dans la bdd
+        $sortie = $sortieRepository ->find($id);
 
-        return $this->render('main/sortie_details.html.twig');
+        return $this->render('main/sortie_details.html.twig',[
+            "sortie" => $sortie
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="sortie_delete")
+     */
+    public function supprimerSortie(Sortie $sortie, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success',"Sortie supprimée !");
+
+        return $this->render('main/home.html.twig');
     }
 
 }
