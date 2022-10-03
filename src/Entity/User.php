@@ -67,6 +67,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $campus;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Participant::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,6 +230,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(string $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getUser(): ?Participant
+    {
+        return $this->user;
+    }
+
+    public function setUser(Participant $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
