@@ -1,6 +1,10 @@
-<nav>
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+{% endblock %}
+<nav class="nav">
     <h1><a href="{{ path('main_home') }}" ><img src="{{ asset('#') }}" alt="logo Sortir.com"></a></h1>
-    <ul>
+    <ul class="navigation">
         {% if app.user %}
             {#  todo:<li><a href="{{ path('main_profile') }}" title="Mon profil">Mon Profil </a></li>#}
             <li><a href="{{ path('app_logout') }}" title="Me déconnecter">Se déconnecter </a></li>
