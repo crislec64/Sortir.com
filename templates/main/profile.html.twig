@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    TODO Créer et afficher mon profil
-{% endblock %}
 {% block body %}
-    <h2>TODO : Créer et afficher mon profil</h2>
-    {# TODO : afficher toutes les infos de mon profil #}
+    <h1>Profil de :{{ user.prenom }} {{ user.nom }}</h1>
+    <div>Campus : {{ user.campus.nom }}</div>
+    <div id="profile_img">
+        {% if user.picture %}
+            <img src="{{ asset('uploads/profiles/'~user.picture) }}" alt="{{ user.prenom }} {{ user.nom }}">
+        {% else %}
+            <img src="{{ asset('img/image-profile-default.jpg') }}" alt="default image">
+        {% endif %}
+    </div>
+
+    {% if app.user == user %}
+        <a href="{{ path('user_edit') }}">Modifié le profil</a><br>
+        <a href="{{ path('user_upload') }}">Modifié l'image</a><br>
+        <a href="{{ path('user_edit_password') }}">Modifié le mot de passe</a>
+    {% endif %}
 {% endblock %}
+
+{% block title %}Profil de {{ user.prenom }} {{ user.nom }}{% endblock %}
