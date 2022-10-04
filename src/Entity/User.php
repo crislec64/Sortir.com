@@ -68,10 +68,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $campus;
 
     /**
-     * @ORM\OneToOne(targetEntity=Participant::class, inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $user;
+    private $is_verified;
+
+
 
     public function getId(): ?int
     {
@@ -234,15 +235,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUser(): ?Participant
+    public function getIsVerified(): ?int
     {
-        return $this->user;
+        return $this->is_verified;
     }
 
-    public function setUser(Participant $user): self
+    public function setIsVerified(int $is_verified): self
     {
-        $this->user = $user;
+        $this->is_verified = $is_verified;
 
         return $this;
     }
+
+    
 }

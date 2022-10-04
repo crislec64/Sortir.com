@@ -1,23 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Profil de :{{ app.user.prenom }} {{ app.user.nom }}</h1>
+    <h1>Modification du profil de :{{ app.user.prenom }} {{ app.user.nom }}</h1>
     <div>Campus : </div>
     <div class="form">
-         <div>Nom : {{ app.user.nom}}</div>
-        <div>Nom : {{ app.user.prenom}}</div>
-        <div>Nom : {{ app.user.pseudo}}</div>
-        <div>Nom : {{ app.user.email}}</div>
-        <div>Nom : {{ app.user.campus}}</div>
-        <div>Nom : {{ app.user.telephone}}</div>
+        {{ form(form)}}
+
         <button>
             <a href="{{ path('editProfile') }}">Modifier</a>
-        </button>
-        <button>
-            <a href="{{ path('pass_modifier') }}">Modifier le mot de passe</a>
-        </button>
-        <button>
-            <a href="{{ path('deleteProfile') }}">supprimer</a>
         </button>
 
     </div>

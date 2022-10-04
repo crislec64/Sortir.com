@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Mon profil{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1>Mon profil</h1>
     {{ form_start(registrationForm) }}
     {{ form_widget(registrationForm)}}
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn">Enregistrer</button>
+
+    <a href="{{  path('editProfile') }}" class="btn">Modifier </a>
     {{ form_end(registrationForm)}}
 
 
