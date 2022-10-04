@@ -3,117 +3,83 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\EditProfileType;
+use App\Form\EditPasswordType;
+use App\Form\ProfileType;
+use App\Form\ProfileUploadType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ *
+ * Affichage et modification des infos des users
+ *
+ * @Route("/profil")
+ */
 class UserController extends AbstractController
 {
     /**
-     *
-     * @Route("/user", name="index")
+     * profil
+     * @Route("/{id}", name="user_profile", requirements={"id": "\d+"})
      */
-    public function index()
+    public function profile(User $user): Response
     {
-        return $this->render('main/profile.html.twig');
-    }
-
-
-    /**
-     *
-     * @Route("/profile/editProfile", name="editProfile")
-     */
-    public function editProfile(Request $request, EntityManagerInterface $entityManager)
-    {
-        $user = $this->getUser();
-        $form = $this->createForm(EditProfileType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-
-            $this->addFlash('message', 'le profile à bien été modifié');
-            return $this->redirectToRoute('index');
+        if (!$user->getIsActive()){
+            throw $this->createNotFoundException("User not found");
+        }
+        if ($user->getIsDeleted()){
+            throw $this->createNotFoundException("User deleted");
         }
 
-        return $this->render('main/editprofile.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('main/profile.html.twig', [
+            'user' => $user
         ]);
     }
 
 
-        /**
-         *
-         * @Route("/profile/pass/modifier", name="pass_modifier")
-         */
-        public function editPass(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
-    {
-        if($request-> isMethod('POST')){
-            $user = $this ->getUser();
-
-            if($request -> request->get('pass') == $request->request->get('pass2')){
-
-                $user->setPassword($passwordHasher->hashPassword(
-                         $user,$request->request->get('pass')));
-                $entityManager->flush();
-                $this->addFlash('message','Mot de passe mis à jour avec succès');
-            }else{
-                $this->addFlash('error','Les deux mots de passe ne sont pas identiques');
-            }
-
-        }
-        return $this->render ('main/editpass.html.twig');
-    }
-
-
-
     /**
+     * Modifier
      *
-     * @Route("/profile/delete", name="deleteProfile")
+     * @Route("/modification", name="user_edit")
      */
-    public function delete(User $user, EntityManagerInterface $entityManager)
+    public function edit(Request $request): Response
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $user = $this->getUser();
 
-            $entityManager->remove($user);
-            $entityManager->flush();
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+            if ($form->isValid()){
+                $em->persist($user);
+                $em->flush();
 
-            $this->addFlash('message', 'le profile à bien été supprimé');
-            return $this->redirectToRoute('main_home');
+                $this->addFlash('success', 'Profile Modified');
+                return $this->redirectToRoute("user_upload");
+            }
+            else {
+                $em->refresh($user);
+            }
+        }
 
+        return $this->render('user/edit.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
 
 
-}
 
-
-/*
-    /**
-     * Charger photo
-     * @Route("/modification", name="")
-     */
-   /* public function upload(Request $request): Response
-    {
-
-    }
-
-*/
 
     /**
      * Modification du profil
      * @Route("/modification/mot-de-passe", name="user_edit_password")
      */
-   /* public function editPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function editPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
         $user = $this->getUser();
@@ -133,11 +99,14 @@ class UserController extends AbstractController
 
             $entityManager->refresh($user);
 
-            return $this->redirectToRoute("user_edit_password", ["id" => $user->getId()]);
+            return $this->redirectToRoute("user_profile", ["id" => $user->getId()]);
         }
 
-        return $this->render('main/profile.html.twig', [
+        return $this->render('user/edit_password.html.twig', [
             'form' => $form->createView(),
         ]);
-    }*/
+    }
 
+
+
+}
