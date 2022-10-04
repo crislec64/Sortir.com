@@ -13,6 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ *
+ * Affichage et modification des infos des users
+ *
+ * @Route("/profil")
+ */
 class UserController extends AbstractController
 {
     /**
@@ -70,17 +76,6 @@ class UserController extends AbstractController
 
 
     /**
-     * Charger photo
-     * @Route("/modification", name="")
-     */
-    public function upload(Request $request): Response
-    {
-
-    }
-
-
-
-    /**
      * Modification du profil
      * @Route("/modification/mot-de-passe", name="user_edit_password")
      */
@@ -111,8 +106,6 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
 
 
 
