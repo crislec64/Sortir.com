@@ -6,8 +6,13 @@
 
 {% block body %}
 <h2>TODO : Creation du formulaire de creation de sorties</h2>
-    {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
+ {{ form_start(sortieForm) }}
+ {{ form_widget(sortieForm) }}}
+
+    <div>Nom : {{ a}}</div>
+
+
+
     <button>Créer cette sortie !</button>
     {{ form_end(sortieForm) }}
 {# TODO : formulaire de creation de sorties > Création / publication / modif / suppr et joindre table lieu, ville  #}

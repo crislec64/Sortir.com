@@ -44,7 +44,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
-    private $mail;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
@@ -63,17 +63,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $motPasse;
+    private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participant")
      */
     private $sorties;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participant")
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
@@ -133,14 +134,14 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function setMail(string $mail): self
+    public function setEMail(string $email): self
     {
-        $this->mail = $mail;
+        $this->email = $email;
 
         return $this;
     }
@@ -181,14 +182,17 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMotPasse(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->motPasse;
+        return $this->password;
     }
 
-    public function setMotPasse(string $motPasse): self
+    public function setPassword(string $password): self
     {
-        $this->motPasse = $motPasse;
+        $this->password = $password;
 
         return $this;
     }
@@ -239,11 +243,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getPassword():String
-    {
-        return $this->motPasse;
-    }
-
     public function getSalt()
     {
         return null;
@@ -255,7 +254,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername()
     {
-        return $this->mail;
+        return $this->email;
     }
 
     public function __call($name, $arguments)

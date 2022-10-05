@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Participant;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,6 +19,7 @@ class EditProfileType extends AbstractType
             ->add('nom')
             ->add('telephone')
             ->add('campus')
+
             ->add('Valider', SubmitType::class)
         ;
     }
@@ -25,7 +27,7 @@ class EditProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Participant::class,
         ]);
     }
 }

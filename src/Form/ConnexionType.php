@@ -13,7 +13,7 @@ class ConnexionType extends AbstractType
     {
         $builder
 
-            ->add('mail')
+            ->add('email')
             ->add('pseudo')
             ->add('motPasse')
 

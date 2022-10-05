@@ -67,10 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $campus;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $is_verified;
+
 
 
 
