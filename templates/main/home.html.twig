@@ -31,7 +31,16 @@
         <td>{{ sortie.nbInscriptionsMax }}</td>
 {#        <td>{{ sortie.etat }}</td>#}
         <td>{{ sortie.organisateur ? 'yes' : '' }}</td>
+        <td> <button>
+                <a href="{{path('sortie_details', {'id':sortie.id}) }}" title="Afficher">Afficher</a>
+            </button>
+        </td>
+        <td> <button>
+                <a href="{{path('editSortie', {'id':sortie.id}) }}" title="Modifier">Afficher</a>
+            </button>
+        </td>
     </tr>
+
     {% endfor %}
 </table>
     {% endblock %}

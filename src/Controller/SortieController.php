@@ -4,6 +4,8 @@ namespace App\Controller;
 
 
 use App\Entity\Sortie;
+use App\Form\EditProfileType;
+use App\Form\EditSortieType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManager;
@@ -94,6 +96,31 @@ class SortieController extends AbstractController
         $this->addFlash('success',"Sortie supprimée !");
 
         return $this->render('main/home.html.twig');
+    }
+    /**
+     *
+     * @Route("/profile/editSortie", name="editSortie")
+     */
+    public function editSortie(Request $request, EntityManagerInterface $entityManager)
+    {
+        $user = $this->getUser();
+        $sortieForm = $this->createForm(EditSortieType::class, $user);
+
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+
+            $this->addFlash('message', 'la sortie à bien été modifiée');
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('main/home.html.twig', [
+            'sortieForm' => $sortieForm->createView(),
+        ]);
     }
 
 }

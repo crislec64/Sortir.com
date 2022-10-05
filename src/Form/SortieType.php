@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
@@ -29,10 +30,14 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
+
             ])
             ->add('nbInscriptionsMax')
             ->add('infosSortie', TextareaType::class)
             ->add('duree')
+            ->add('etat', EntityType::class,[
+                'class'=> Etat::class
+            ])
             //TODO check jointure form dans controller
 //            ->add('ville', EntityType::class,[
 //                'class' => Ville::class,
@@ -48,6 +53,7 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom'
             ])
         ;
+
     }
     //TODO AJOUTER CHAMPS VILLES LONGITUDE LATITUDE
 

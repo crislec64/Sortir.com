@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    TODO afficher le nom de la sortie | {{ parent }}
+    {{ sortie.nom }} | {{ parent() }}
 {% endblock %}
 
 {% block body %}
 <h2>TODO : Nom de la sortie et champs (descriptions, dates, etc.)</h2>
+    <div>{{ sortie.nom }}</div>
+    <div>{{ sortie.dateHeureDebut|date("D-M-Y")}}</div>
+    <div>{{ sortie.dateLimiteInscription|date("D-M-Y") }}</div>
+    <div>{{ sortie.nbInscriptionsMax }}</div>
+    <div>{{ sortie.infosSortie }}</div>
+    <div>{{ sortie.lieu }}</div>
+    <div>{{ sortie.etat }}</div>
+    <div>{{ sortie.organisateur }}</div>
 
     {# TODO : afficher toutes les infos d'une sortie #}
 {% endblock %}
