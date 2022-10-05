@@ -24,15 +24,18 @@ class SortieController extends AbstractController
         EntityManagerInterface $entityManager
         ):Response
     {
+        //alimenter l'organisateur
         $sortie = new Sortie();
+        $sortie -> setOrganisateur($this ->getUser());
+        $sortie -> setCampus($this ->getUser()->getCampus());
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
+// renseigner le campus
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $entityManager->persist($sortie);
             $entityManager->flush();
-
 
         $this->addFlash('success', "Sortie créée !");
         return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);

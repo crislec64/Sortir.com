@@ -63,7 +63,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
-     * @ORM\Column(type="string", length=50, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $motPasse;
 
@@ -234,9 +234,9 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         public function getRoles(): array
     {
-        return $this->roles;
+        return $this->administrateur ?["ROLE_ADMIN"]:["ROLE_USER"];
 
-    }// TODO tab roles user/admin
+    }
 
 
     public function getPassword():String
