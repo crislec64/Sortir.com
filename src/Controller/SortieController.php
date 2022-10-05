@@ -88,7 +88,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/delete/{id}", name="sortie_delete")
      */
-    public function supprimerSortie(Sortie $sortie, EntityManagerInterface $entityManager): Response
+    public function delete(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($sortie);
         $entityManager->flush();

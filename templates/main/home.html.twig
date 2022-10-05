@@ -30,13 +30,19 @@
         <td>{{ sortie.dateLimiteInscription |date('d-m-y') }}</td>
         <td>{{ sortie.nbInscriptionsMax }}</td>
 {#        <td>{{ sortie.etat }}</td>#}
-        <td>{{ sortie.organisateur ? 'yes' : '' }}</td>
+        <td>{{ sortie.organisateur }}</td>
         <td> <button>
                 <a href="{{path('sortie_details', {'id':sortie.id}) }}" title="Afficher">Afficher</a>
             </button>
         </td>
-        <td> <button>
-                <a href="{{path('editSortie', {'id':sortie.id}) }}" title="Modifier">Afficher</a>
+        <td>
+            <button>
+                <a href="{{path('editSortie', {'id':sortie.id}) }}" title="Modifier">Modifier</a>
+            </button>
+        </td>
+        <td>
+            <button>
+                <a href="{{path('sortie_delete', {'id':sortie.id}) }}" title="Supprimer">Supprimer</a>
             </button>
         </td>
     </tr>
