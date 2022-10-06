@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Modification du profil de :{{ app.user.prenom }} {{ app.user.nom }}</h1>
+    <h1></h1>
     <div>Campus : </div>
     <div class="form">
-        {{ form(form)}}
+         <div>Nom : {{ app.user.nom}}</div>
+        <div>Prenom : {{ app.user.prenom}}</div>
+        <div>Pseudo : {{ app.user.pseudo}}</div>
+        <div>Email : {{ app.user.email}}</div>
+        <div>Campus : {{ app.user.campus.id}}</div>
+        <div>Téléphone : {{ app.user.telephone}}</div>
+        <div>Mot de passe : {{ app.user.password}}</div>
 
-        <button>
-            <a href="{{ path('editProfile') }}">Modifier</a>
-        </button>
 
 
     </div>
@@ -31,4 +34,3 @@
     {% endif %} #}
 {% endblock %}
 
-{% block title %}Profil de {{ app.user.prenom}} {{ app.user.nom }}{% endblock %}

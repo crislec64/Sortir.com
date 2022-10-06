@@ -31,14 +31,11 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
-
             ])
             ->add('nbInscriptionsMax')
             ->add('infosSortie', TextareaType::class)
             ->add('duree')
-            ->add('etat', EntityType::class,[
-                'class'=> Etat::class
-            ])
+
             //TODO check jointure form dans controller
 //            ->add('ville', EntityType::class,[
 //                'class' => Ville::class,
@@ -53,9 +50,9 @@ class SortieType extends AbstractType
                 'class' => Lieu::class,
                 'choice_label' => 'nom'
             ])
-            ->add('Participant',EntityType::class,[
-                'class'=> Participant::class
-    ])
+//            ->add('Participant',EntityType::class,[
+//                'class'=> Participant::class
+//    ])
         ;
 
     }

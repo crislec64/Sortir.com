@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Entity\User;
 use App\Form\EditProfileType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +22,14 @@ class UserController extends AbstractController
     public function index()
     {
         return $this->render('main/profile.html.twig');
+    }
+    /**
+     *
+     * @Route("/profil", name="vision")
+     */
+    public function vision()
+    {
+        return $this->render('main/vision.html.twig');
     }
 
 
@@ -77,21 +86,17 @@ class UserController extends AbstractController
 
 
     /**
-     *
-     * @Route("/profile/delete", name="deleteProfile")
+     * @Route("/profile/delete/{id}", name="deleteParticipant")
      */
-    public function delete(User $user, EntityManagerInterface $entityManager)
+    public function delete (User $user, EntityManagerInterface $entityManager)
     {
+        $entityManager->remove($user);
+        $entityManager->flush();
 
 
-            $entityManager->remove($user);
-            $entityManager->flush();
-
-
-            $this->addFlash('message', 'le profile à bien été supprimé');
-            return $this->redirectToRoute('main_home');
-
+        return $this->redirectToRoute('main_home');
     }
+
 
 
 }

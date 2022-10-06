@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modification d'une sortie</h1>
+
+    <div class="form">
+        {{ form(sortieForm)}}
+
+        <button>
+            <a href="{{ path('editSortie') }}">Modifier</a>
+        </button>
+
+
+    </div>
+
+{% endblock %}
+

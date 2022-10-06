@@ -55,7 +55,7 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties",cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
      */
     private $participant;
 
@@ -66,7 +66,7 @@ class Sortie
     private $campus;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties",cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties",)
      * @ORM\JoinColumn(nullable=false)
      */
     private $etat;

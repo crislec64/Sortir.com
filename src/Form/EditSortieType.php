@@ -2,11 +2,13 @@
 
 namespace App\Form;
 
+use App\Controller\SortieController;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\User;
+use App\Repository\SortieRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -36,9 +38,7 @@ class EditSortieType extends AbstractType
             ->add('nbInscriptionsMax')
             ->add('infosSortie', TextareaType::class)
             ->add('duree')
-            ->add('etat', EntityType::class,[
-                'class'=> Etat::class
-            ])
+
             ->add('lieu',EntityType::class,[
                 'class' => Lieu::class,
                 'choice_label' => 'nom',
