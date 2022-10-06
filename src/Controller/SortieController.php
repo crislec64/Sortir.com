@@ -10,6 +10,7 @@ use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,7 @@ class SortieController extends AbstractController
 
         $sortie -> setCampus($this ->getUser()->getCampus());
         $sortie -> setEtat($this ->getUser()->getEtat());
+
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
@@ -79,24 +81,15 @@ class SortieController extends AbstractController
     public function afficherUneSortie(int $id, SortieRepository $sortieRepository): Response
     {
         $sortie = $sortieRepository ->find($id);
-
-        return $this->render('main/sortie_details.html.twig',[
-            "sortie" => $sortie
+        if(!$sortie){
+            throw $this->createNotFoundException(' existe pas!!');
+        }
+        return $this->render('main/home.html.twig',[
+            "sortie"=> $sortie
         ]);
     }
 
-    /**
-     * @Route("/delete/{id}", name="sortie_delete")
-     */
-    public function delete(Sortie $sortie, EntityManagerInterface $entityManager): Response
-    {
-        $entityManager->remove($sortie);
-        $entityManager->flush();
 
-        $this->addFlash('success',"Sortie supprimée !");
-
-        return $this->render('main/home.html.twig');
-    }
     /**
      *
      * @Route("/profile/editSortie", name="editSortie")
@@ -121,6 +114,18 @@ class SortieController extends AbstractController
         return $this->render('main/home.html.twig', [
             'sortieForm' => $sortieForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="deleteSortie")
+     */
+    public function delete (Sortie $sortie, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+
+
+        return $this->redirectToRoute('main_home');
     }
 
 }

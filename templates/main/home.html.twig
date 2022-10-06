@@ -23,13 +23,13 @@
         <th>inscrit/places</th>
         <th>Organisateur</th>
     </tr>
-{% for sortie in sorties %}
+    {% for sortie in sorties %}
     <tr>
         <td>{{ sortie.nom }}</td>
         <td>{{ sortie.dateHeureDebut |date('d-m-y H:i') }}</td>
         <td>{{ sortie.dateLimiteInscription |date('d-m-y') }}</td>
-        <td>{{ sortie.nbInscriptionsMax }}</td>
-{#        <td>{{ sortie.etat }}</td>#}
+        <td>{{ sortie.participant| length }}/{{ sortie.nbInscriptionsMax }}</td>
+        <td>{{ sortie.etat }}</td>
         <td>{{ sortie.organisateur }}</td>
         <td> <button>
                 <a href="{{path('sortie_details', {'id':sortie.id}) }}" title="Afficher">Afficher</a>
@@ -42,7 +42,7 @@
         </td>
         <td>
             <button>
-                <a href="{{path('sortie_delete', {'id':sortie.id}) }}" title="Supprimer">Supprimer</a>
+                <a href="{{path('deleteSortie', {'id':sortie.id}) }}" title="Supprimer">Supprimer</a>
             </button>
         </td>
     </tr>
