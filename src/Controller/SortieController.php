@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\EditProfileType;
 use App\Form\EditSortieType;
@@ -32,8 +33,6 @@ class SortieController extends AbstractController
         $sortie -> setOrganisateur($this ->getUser());
 
         $sortie -> setCampus($this ->getUser()->getCampus());
-        $sortie -> setEtat($this ->getUser()->getEtat());
-
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
@@ -41,12 +40,15 @@ class SortieController extends AbstractController
 
 // renseigner le campus
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            $etat = $entityManager ->getRepository(Etat::class)->findOneBy(['libelle'=>'Créée']);
+
+            $sortie -> setEtat($etat);
 
             $entityManager->persist($sortie);
             $entityManager->flush();
 
         $this->addFlash('success', "Sortie créée !");
-        return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        return $this->redirectToRoute('main_home');
         //TODO traiter le formulaire
     }
 
